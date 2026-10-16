@@ -2,7 +2,7 @@ using System.Net;
 using System.Net.Http.Json;
 
 namespace RaceDay.Tests;
-
+// Tests that the API enforces role-based access control correctly.
 /// <summary>Participants cannot use Organiser features, Organisers cannot use Participant features, anonymous users get 401.</summary>
 public class RoleEnforcementTests(RaceDayFactory factory) : IClassFixture<RaceDayFactory>
 {
