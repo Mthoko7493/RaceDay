@@ -17,6 +17,8 @@ public class RaceDayDbContext(DbContextOptions<RaceDayDbContext> options) : DbCo
     public DbSet<Enrolment> Enrolments => Set<Enrolment>();
     public DbSet<Result> Results => Set<Result>();
 
+    // Configure the EF Core model to match the Part 1 ERD and SQL script.
+
     protected override void OnModelCreating(ModelBuilder mb)
     {
         mb.Entity<Role>(e =>
