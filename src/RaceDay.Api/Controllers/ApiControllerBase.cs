@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using RaceDay.Api.Security;
 
 namespace RaceDay.Api.Controllers;
-
+//createe a base controller for all API controllers to inherit from, providing common functionality
 [ApiController]
 [Produces("application/json")]
 public abstract class ApiControllerBase : ControllerBase
