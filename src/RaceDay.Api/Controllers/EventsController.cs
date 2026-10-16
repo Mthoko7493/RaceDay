@@ -6,7 +6,7 @@ using RaceDay.Api.Models;
 using RaceDay.Api.Security;
 
 namespace RaceDay.Api.Controllers;
-
+//create a controller for events with endpoints for listing, getting, creating, updating, and deleting events
 [Route("api/events")]
 [Tags("Events")]
 public class EventsController(RaceDayDbContext db) : ApiControllerBase
