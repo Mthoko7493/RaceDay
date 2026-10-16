@@ -1,7 +1,7 @@
 using RaceDay.Api.Security;
 
 namespace RaceDay.Tests;
-
+// Unit tests for the PasswordHasher class
 public class PasswordHasherTests
 {
     [Fact]
