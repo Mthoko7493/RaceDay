@@ -6,7 +6,7 @@ using RaceDay.Api.Models;
 using RaceDay.Api.Security;
 
 namespace RaceDay.Api.Controllers;
-
+//create a controller for authentication with endpoints for register, login, and logout
 [Route("api/auth")]
 [Tags("Authentication")]
 public class AuthController(RaceDayDbContext db) : ApiControllerBase
