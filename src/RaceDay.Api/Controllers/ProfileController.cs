@@ -5,7 +5,7 @@ using RaceDay.Api.Dtos;
 using RaceDay.Api.Security;
 
 namespace RaceDay.Api.Controllers;
-
+//create a controller for user profile with endpoints for getting and updating the logged-in user's profile
 [Route("api/profile")]
 [Tags("User Profile")]
 [SessionAuthorize]
