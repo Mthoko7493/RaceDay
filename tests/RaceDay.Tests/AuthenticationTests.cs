@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RaceDay.Api.Data;
 
 namespace RaceDay.Tests;
-
+//class AuthenticationTests : IClassFixture<RaceDayFactory>
 public class AuthenticationTests(RaceDayFactory factory) : IClassFixture<RaceDayFactory>
 {
     [Theory]
