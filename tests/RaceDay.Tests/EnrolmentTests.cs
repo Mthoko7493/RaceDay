@@ -2,7 +2,7 @@ using System.Net;
 using System.Net.Http.Json;
 
 namespace RaceDay.Tests;
-
+// Tests for enrolment and category management, including participant enrolment, organiser viewing of enrolments, and category CRUD operations.
 public class EnrolmentTests(RaceDayFactory factory) : IClassFixture<RaceDayFactory>
 {
     [Fact]
