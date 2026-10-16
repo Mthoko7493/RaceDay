@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace RaceDay.Tests;
-
+// Boots the real API in a test environment, with an isolated in-memory database per factory instance.
 /// <summary>Boots the real API in the "Testing" environment (isolated in-memory database per factory).</summary>
 public class RaceDayFactory : WebApplicationFactory<Program>
 {
