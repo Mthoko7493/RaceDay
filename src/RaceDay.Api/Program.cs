@@ -3,7 +3,7 @@ using RaceDay.Api.Data;
 using RaceDay.Api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
+//create a new web application builder and configure services for the RaceDay API, including database context, session management, controllers, and Swagger documentation.
 // ASPNETCORE_ENVIRONMENT=Testing swaps SQL Server for an isolated in-memory database (used by the unit tests).
 var isTesting = builder.Environment.IsEnvironment("Testing");
 var inMemoryName = $"RaceDayTests-{Guid.NewGuid()}";
