@@ -109,6 +109,14 @@ The tests boot the real API through `WebApplicationFactory` with `ASPNETCORE_ENV
 | `PasswordHasherTests` | Hash/verify, salting, malformed hashes |
 
 ## CI/CD
+
+Race Results
+
+Record race results.
+
+View results for an event.
+
+Retrieve a participant's results.
 `.github/workflows/part2-ci.yml` restores, builds (Release) and runs all tests on every push and pull request.
 
 ## AI usage disclosure
