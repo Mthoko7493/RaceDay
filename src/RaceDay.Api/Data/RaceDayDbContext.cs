@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using RaceDay.Api.Models;
 
 namespace RaceDay.Api.Data;
+//// The User entity stores account information and links each user to a role.
 
 /// <summary>
 /// EF Core model that mirrors the Part 1 ERD and SQL script
