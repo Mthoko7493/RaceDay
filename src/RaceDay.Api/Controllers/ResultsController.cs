@@ -6,7 +6,7 @@ using RaceDay.Api.Models;
 using RaceDay.Api.Security;
 
 namespace RaceDay.Api.Controllers;
-
+//create a controller for results with endpoints for recording results, getting personal results, and getting event results
 [Tags("Results")]
 public class ResultsController(RaceDayDbContext db) : ApiControllerBase
 {
