@@ -14,7 +14,7 @@ public class AuthenticationTests(RaceDayFactory factory) : IClassFixture<RaceDay
     {
         var client = factory.NewClient();
         var response = await client.PostAsJsonAsync("/api/auth/register", TestHelpers.RegisterBody(TestHelpers.UniqueEmail(), role));
-
+        //
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         var body = await response.Content.ReadAsStringAsync();
         Assert.DoesNotContain("password", body, StringComparison.OrdinalIgnoreCase);
