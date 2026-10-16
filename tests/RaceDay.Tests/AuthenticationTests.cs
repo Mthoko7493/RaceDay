@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RaceDay.Api.Data;
 
 namespace RaceDay.Tests;
-
+//create a test class for authentication endpoints, using xunit and the RaceDayFactory fixture
 public class AuthenticationTests(RaceDayFactory factory) : IClassFixture<RaceDayFactory>
 {
     [Theory]
