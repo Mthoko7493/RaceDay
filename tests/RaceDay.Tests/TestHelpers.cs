@@ -20,6 +20,8 @@ public record EventDto(int EventId, int OrganiserId, string Name, string EventTy
 public record EnrolmentDto(int EnrolmentId, int EventId, int CategoryId, int ParticipantId, string Status);
 public record ResultDto(int ResultId, int EnrolmentId, int EventId, string FinishTime, int FinishPosition, int TotalFinishers);
 
+/// Helper methods for tests, e.g. signing up users, creating events, etc.
+
 public static class TestHelpers
 {
     public const string Password = "Passw0rd!";
