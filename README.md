@@ -224,3 +224,35 @@ SQL Server Management Studio (SSMS).
 Event banner images are stored in the events folder.
 
 The application uses the saved image paths to display the uploaded pictures.
+
+7. How to Run the Application
+
+Step 1: Extract the Project
+
+Extract the RaceDay project ZIP file to your computer.
+
+Step 2: Open the Project
+
+Open the solution in Visual Studio.
+
+Step 3: Configure the Database
+
+Check the connection string in the API project's appsettings.json file.
+
+Make sure it points to your SQL Server database.
+
+Step 4: Start the API
+
+Open a terminal in the project directory and run:
+
+dotnet run --project src/RaceDay.Api
+
+Step 5: Start the MVC Application
+
+Open a second terminal and run:
+
+dotnet run --project src/RaceDay.Mvc
+
+Step 6: Open RaceDay
+
+Open the MVC application using the HTTPS address displayed in the terminal.
