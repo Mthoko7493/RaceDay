@@ -166,3 +166,20 @@ View personal race results.
 Update personal information.
 
 Upload a profile picture.
+
+4. Image Uploads
+
+RaceDay uses the wwwroot folder to store uploaded images locally.
+
+The image folders are organised as follows:
+
+wwwroot/
+    uploads/
+        profiles/
+        events/
+
+Profile pictures are stored in the profiles folder.
+
+Event banner images are stored in the events folder.
+
+The application uses the saved image paths to display the uploaded pictures.
