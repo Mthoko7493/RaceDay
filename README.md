@@ -268,3 +268,41 @@ Users can log out when they have finished using the application.
 Step 6: Open RaceDay
 
 Open the MVC application using the HTTPS address displayed in the terminal.
+
+9. GitHub Repository
+
+GitHub Repository Link:
+
+[Insert your GitHub repository link here]
+
+10. Video Demonstration
+
+YouTube Demonstration Link:
+
+[Insert your unlisted YouTube video link here]
+
+The demonstration should show:
+
+The application running.
+
+Registration and login.
+
+Organiser dashboard and event management.
+
+Event banner uploads.
+
+Category management.
+
+Participant enrolments.
+
+Results entry and publication.
+
+Participant profile and profile picture upload.
+
+Participant race history and results.
+
+11. Conclusion
+
+RaceDay Part 3 extends the existing RaceDay API by providing an MVC web application for managing sporting events and participant activities.
+
+The system provides separate interfaces for Organisers and Participants and supports event management, enrolments, image uploads and race results.
