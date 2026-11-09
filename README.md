@@ -253,6 +253,18 @@ Open a second terminal and run:
 
 dotnet run --project src/RaceDay.Mvc
 
+8. Authentication and Navigation
+
+Users must register and log in before accessing protected features.
+
+The application provides different interfaces depending on the user's role:
+
+Organiser: event management, categories, enrolments and results.
+
+Participant: upcoming events, enrolments, personal results and profile management.
+
+Users can log out when they have finished using the application.
+
 Step 6: Open RaceDay
 
 Open the MVC application using the HTTPS address displayed in the terminal.
