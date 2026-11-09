@@ -1,4 +1,4 @@
-# RaceDay API - Part 2
+# RaceDay API - Part 2 and 3 
 
 RESTful ASP.NET Core 8 Web API for **RaceDay**, an event management platform for South African road running, walking and cycling events. Built to the Part 1 endpoint plan, using Entity Framework Core (Code-First) on SQL Server, server-side session authentication, Swagger, and xUnit tests run through GitHub Actions.
 
@@ -121,3 +121,11 @@ Retrieve a participant's results.
 
 ## AI usage disclosure
 `<Edit this to describe honestly how you used AI tools, e.g. "Claude was used to generate a first draft of the controllers and tests, which I reviewed, ran and modified.">`
+
+RaceDay – Part 3
+
+1. Project Overview
+
+RaceDay is a web-based race event management system developed using ASP.NET Core MVC and an existing ASP.NET Core Web API.
+
+The application allows Organisers to manage sporting events, categories, participant enrolments and race results. Participants can browse upcoming events, enrol in events, manage their profiles and view their race results.
