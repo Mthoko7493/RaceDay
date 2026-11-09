@@ -301,6 +301,192 @@ Participant profile and profile picture upload.
 
 Participant race history and results.
 
+# RaceDay – Part 3
+
+## 1. Project Overview
+
+RaceDay is a web-based race event management system developed using ASP.NET Core MVC and an existing ASP.NET Core Web API.
+
+The application allows Organisers to manage sporting events, categories, participant enrolments and race results. Participants can browse upcoming events, enrol in events, manage their profiles and view their race results.
+
+Part 3 extends the functionality developed in Part 2 by introducing a user-friendly MVC interface.
+
+## 2. Technologies Used
+
+- C#
+- ASP.NET Core MVC
+- ASP.NET Core Web API
+- .NET 8
+- Entity Framework Core (Part 2 API)
+- SQL Server
+- HTML
+- CSS
+- Bootstrap
+- JavaScript
+- Visual Studio
+- GitHub
+
+## 3. Main Features
+
+### Organiser Features
+
+- Organiser registration and login.
+- Organiser dashboard.
+- View created events and enrolment totals.
+- Create, edit and delete events.
+- Upload event banner images.
+- Manage event categories.
+- View participant enrolments and their statuses.
+- Enter participant finishing times and positions.
+- Publish race results.
+
+### Participant Features
+
+- Participant registration and login.
+- View upcoming events.
+- View event information and available categories.
+- Enrol in events and select categories.
+- View personal event enrolments and statuses.
+- View personal race results.
+- Update personal information.
+- Upload a profile picture.
+
+## 4. Image Uploads
+
+RaceDay uses the `wwwroot` folder to store uploaded images locally.
+
+The image folders are organised as follows:
+
+```text
+wwwroot/
+    uploads/
+        profiles/
+        events/
+```
+
+- Profile pictures are stored in the profiles folder.
+- Event banner images are stored in the events folder.
+
+The application uses the saved image paths to display the uploaded pictures.
+
+## 5. Project Structure
+
+```text
+RaceDay/
+│
+├── Part2/
+│   └── src/
+│       ├── RaceDay.Api/
+│       │
+│       └── RaceDay.Mvc/
+│           ├── Controllers/
+│           ├── Models/
+│           ├── Services/
+│           ├── Views/
+│           ├── wwwroot/
+│           │   ├── css/
+│           │   ├── js/
+│           │   └── uploads/
+│           │       ├── profiles/
+│           │       └── events/
+│           │
+│           ├── Program.cs
+│           ├── appsettings.json
+│           └── RaceDay.Mvc.csproj
+│
+├── .github/
+│   └── workflows/
+│
+└── README.md
+```
+
+## 6. Requirements Before Running
+
+Install the following software:
+
+- Visual Studio 2022.
+- .NET 8 SDK.
+- SQL Server.
+- SQL Server Management Studio (SSMS).
+
+Make sure the Part 2 database is configured and accessible.
+
+## 7. How to Run the Application
+
+### Step 1: Extract the Project
+
+Extract the RaceDay project ZIP file to your computer.
+
+### Step 2: Open the Project
+
+Open the solution in Visual Studio.
+
+### Step 3: Configure the Database
+
+Check the connection string in the API project's `appsettings.json` file.
+
+Make sure it points to your SQL Server database.
+
+### Step 4: Start the API
+
+Open a terminal in the project directory and run:
+
+```bash
+dotnet run --project src/RaceDay.Api
+```
+
+### Step 5: Start the MVC Application
+
+Open a second terminal and run:
+
+```bash
+dotnet run --project src/RaceDay.Mvc
+```
+
+### Step 6: Open RaceDay
+
+Open the MVC application using the HTTPS address displayed in the terminal.
+
+## 8. Authentication and Navigation
+
+Users must register and log in before accessing protected features.
+
+The application provides different interfaces depending on the user's role:
+
+- Organiser: event management, categories, enrolments and results.
+- Participant: upcoming events, enrolments, personal results and profile management.
+
+Users can log out when they have finished using the application.
+
+## 9. GitHub Repository
+
+GitHub Repository Link:
+
+[Insert your GitHub repository link here]
+
+## 10. Video Demonstration
+
+YouTube Demonstration Link:
+
+[Insert your unlisted YouTube video link here]
+
+The demonstration should show:
+
+- The application running.
+- Registration and login.
+- Organiser dashboard and event management.
+- Event banner uploads.
+- Category management.
+- Participant enrolments.
+- Results entry and publication.
+- Participant profile and profile picture upload.
+- Participant race history and results.
+
+## 11. Conclusion
+
+RaceDay Part 3 extends the existing RaceDay API by providing an MVC web application for managing sporting events and participant activities.
+
+The system provides separate interfaces for Organisers and Participants and supports event management, enrolments, image uploads and race results.
 11. Conclusion
 
 RaceDay Part 3 extends the existing RaceDay API by providing an MVC web application for managing sporting events and participant activities.
