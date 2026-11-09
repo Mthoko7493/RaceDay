@@ -96,6 +96,32 @@ RaceDay is a web-based race event management system developed using ASP.NET Core
 The application allows Organisers to manage sporting events, categories, participant enrolments and race results. Participants can browse upcoming events, enrol in events, manage their profiles and view their race results.
 
 Part 3 extends the functionality developed in Part 2 by introducing a user-friendly MVC interface.
+
+2. Technologies Used
+
+C#
+
+ASP.NET Core MVC
+
+ASP.NET Core Web API
+
+.NET 8
+
+Entity Framework Core (Part 2 API)
+
+SQL Server
+
+HTML
+
+CSS
+
+Bootstrap
+
+JavaScript
+
+Visual Studio
+
+GitHub
 - Run `dotnet test RaceDay.sln` and confirm the GitHub Actions workflow passes.
 - Add at least 20 meaningful commits for the Part 3 work as required by the assignment; do not create artificial empty commits.
 - Add the real GitHub repository URL, CI screenshot and unlisted video link after recording your own demonstration. The video should show the code structure and the working features.
