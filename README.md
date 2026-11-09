@@ -180,6 +180,35 @@ wwwroot/
 
 Profile pictures are stored in the profiles folder.
 
+5. Project Structure
+
+RaceDay/
+│
+├── Part2/
+│   └── src/
+│       ├── RaceDay.Api/
+│       │
+│       └── RaceDay.Mvc/
+│           ├── Controllers/
+│           ├── Models/
+│           ├── Services/
+│           ├── Views/
+│           ├── wwwroot/
+│           │   ├── css/
+│           │   ├── js/
+│           │   └── uploads/
+│           │       ├── profiles/
+│           │       └── events/
+│           │
+│           ├── Program.cs
+│           ├── appsettings.json
+│           └── RaceDay.Mvc.csproj
+│
+├── .github/
+│   └── workflows/
+│
+└── README.md
+
 Event banner images are stored in the events folder.
 
 The application uses the saved image paths to display the uploaded pictures.
