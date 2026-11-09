@@ -87,10 +87,15 @@ The GitHub Actions workflow at `.github/workflows/part2-ci.yml` restores and bui
 
 The supplied Part 3 assignment document specifies Azure Blob Storage and Docker. This implementation follows the student's requested alternative of local `wwwroot` image storage and no Docker. It therefore does not claim to satisfy the Azure Blob Storage or Docker rubric criteria. Confirm the alternative with the lecturer before submission.
 
-## Before submission
+RaceDay – Part 3
 
-- Run the API and MVC locally and test both Organiser and Participant accounts.
-- Verify event creation, editing, deletion, category management, enrolment, cancellation, result publishing and profile updates.
+1. Project Overview
+
+RaceDay is a web-based race event management system developed using ASP.NET Core MVC and an existing ASP.NET Core Web API.
+
+The application allows Organisers to manage sporting events, categories, participant enrolments and race results. Participants can browse upcoming events, enrol in events, manage their profiles and view their race results.
+
+Part 3 extends the functionality developed in Part 2 by introducing a user-friendly MVC interface.
 - Run `dotnet test RaceDay.sln` and confirm the GitHub Actions workflow passes.
 - Add at least 20 meaningful commits for the Part 3 work as required by the assignment; do not create artificial empty commits.
 - Add the real GitHub repository URL, CI screenshot and unlisted video link after recording your own demonstration. The video should show the code structure and the working features.
