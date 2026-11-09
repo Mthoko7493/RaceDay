@@ -209,6 +209,18 @@ RaceDay/
 │
 └── README.md
 
+6. Requirements Before Running
+
+Install the following software:
+
+Visual Studio 2022.
+
+.NET 8 SDK.
+
+SQL Server.
+
+SQL Server Management Studio (SSMS).
+
 Event banner images are stored in the events folder.
 
 The application uses the saved image paths to display the uploaded pictures.
