@@ -1,131 +1,97 @@
-# RaceDay API - Part 2 and 3 
+# RaceDay – Part 2 API and Part 3 MVC
 
-RESTful ASP.NET Core 8 Web API for **RaceDay**, an event management platform for South African road running, walking and cycling events. Built to the Part 1 endpoint plan, using Entity Framework Core (Code-First) on SQL Server, server-side session authentication, Swagger, and xUnit tests run through GitHub Actions.
+RaceDay is an ASP.NET Core 8 event-management application for running, walking and cycling events. Part 3 is an MVC front end that consumes the existing Part 2 Web API. The MVC application does **not** connect directly to SQL Server and does not duplicate the API's business rules.
 
-- **Part 1 docs:** see `/docs` (ERD, endpoint plan, SQL script)
-- **YouTube video (unlisted):** `<paste link here>`
-- **CI/CD green build:** `<paste screenshot here, e.g. ![CI](docs/ci-part2.png)>`
+## Solution structure
 
-## Roles
-
-| Role | Can do |
-|---|---|
-| **Organiser** | Create, edit and delete their own events; add/edit/delete categories on their events; view all enrolments for their events; capture finish times and positions. |
-| **Participant** | Browse events and categories; enrol in an event under a category; view and cancel their own enrolments; view their own results. |
-| Both | Register, log in/out, view and update their own profile. Public (no login): list events, event detail, categories, event results. |
-
-Role checks are enforced on the server by `SessionAuthorizeAttribute`: **401** when there is no session, **403** when the role is wrong or the resource belongs to another Organiser/Participant.
-
-## Project layout
-
-```
+```text
 Part2/
   RaceDay.sln
-  src/RaceDay.Api/            ASP.NET Core Web API
-    Controllers/              Auth, Profile, Events, Categories, Enrolments, Results
-    Data/RaceDayDbContext.cs  EF Core model (mirrors the Part 1 ERD / SQL script)
-    Models/Entities.cs        Role, User, Event, Category, Enrolment, Result
-    Dtos/Dtos.cs              Request/response contracts + mappers
-    Security/                 PBKDF2 PasswordHasher, session authorisation filter
-  tests/RaceDay.Tests/        xUnit tests (WebApplicationFactory, in-memory DB)
-.github/workflows/part2-ci.yml   Build + test on every push
+  src/
+    RaceDay.Api/       Existing Part 2 Web API, EF Core and authentication
+    RaceDay.Mvc/       Part 3 ASP.NET Core MVC application
+      Controllers/     Account, Events, Organiser, Participant, Profile
+      Models/          MVC view models
+      Services/        API client and local image storage
+      Views/           Razor pages
+      wwwroot/         CSS and uploaded images
+  tests/RaceDay.Tests/ Existing Part 2 API tests
 ```
 
-## Setup and run
+## Requirements
 
-Prerequisites: .NET 8 SDK and SQL Server (LocalDB, Express or full).
+- .NET 8 SDK
+- SQL Server (LocalDB, SQL Server Express or full SQL Server)
+- The Part 2 API database connection string configured in `src/RaceDay.Api/appsettings.json`
 
-1. Check the connection string in `src/RaceDay.Api/appsettings.json` (default: LocalDB, database `RaceDayDB`).
-2. Database - pick **one**:
-   - **Let EF create it:** just run the API. On startup `EnsureCreated()` builds the schema if the database is empty and seeds the two roles.
-   - **Use the Part 1 script:** run `docs/RaceDay.sql` in SSMS first. The API detects the existing tables and leaves them alone.
-3. Run:
+## Run the application
+
+1. Open a terminal in the `Part2` directory.
+2. Confirm the SQL Server connection string in `src/RaceDay.Api/appsettings.json`.
+3. Start the API in terminal 1:
+
    ```bash
-   cd Part2
-   dotnet restore
    dotnet run --project src/RaceDay.Api
    ```
-4. Open the URL printed in the console, `/swagger` opens automatically from `/`.
 
-> **Seed users from the SQL script:** their `PasswordHash` values must be in this API's format (`v1.<iterations>.<salt>.<hash>`) to log in. If they are placeholders, register fresh users through `POST /api/auth/register`.
+   The supplied API launch profile uses `https://localhost:53732` and `http://localhost:53733`. Open `https://localhost:53732/swagger` to check the API.
 
-### Using Swagger
-1. `POST /api/auth/register` (choose `Organiser` or `Participant`), then `POST /api/auth/login`.
-2. Swagger UI is same-origin, so the session cookie (`.RaceDay.Session`) is sent automatically on later calls.
-3. `POST /api/auth/logout` ends the session. To switch role, log out and log in as the other user.
+4. Start MVC in terminal 2:
 
-## Authentication design
-- Passwords are hashed with PBKDF2-SHA256 (100,000 iterations, random 16-byte salt) and never stored or returned in plain text.
-- Login stores `UserId` and `Role` in a **server-side session**; the browser only holds an HttpOnly session cookie (30 min idle timeout). The session is cleared first on login (prevents session fixation) and on logout.
-- Role selection at registration follows the Part 1 plan (`role` in the request body). In a production system, Organiser accounts would need an approval step or invite code, otherwise anyone can self-register as an Organiser.
+   ```bash
+   dotnet run --project src/RaceDay.Mvc
+   ```
 
-## Endpoints (21, same as the Part 1 plan)
+   The supplied MVC launch profile uses `https://localhost:53734` and `http://localhost:53735`. Open `https://localhost:53734`.
 
-| Method | Route | Role |
-|---|---|---|
-| POST | `/api/auth/register` | None |
-| POST | `/api/auth/login` | None |
-| POST | `/api/auth/logout` | Any |
-| GET / PUT | `/api/profile` | Any |
-| GET | `/api/events` | None |
-| GET | `/api/events/{id}` | None |
-| POST | `/api/events` | Organiser |
-| PUT / DELETE | `/api/events/{id}` | Organiser (owner) |
-| GET | `/api/events/{eventId}/categories` | None |
-| POST | `/api/events/{eventId}/categories` | Organiser (owner) |
-| PUT / DELETE | `/api/categories/{id}` | Organiser (owner) |
-| POST | `/api/events/{eventId}/enrolments` | Participant |
-| GET | `/api/enrolments/my` | Participant |
-| GET | `/api/events/{eventId}/enrolments` | Organiser (owner) |
-| DELETE | `/api/enrolments/{id}` | Participant (owner) |
-| POST | `/api/enrolments/{enrolmentId}/result` | Organiser (owner) |
-| GET | `/api/results/my` | Participant |
-| GET | `/api/events/{eventId}/results` | None |
+5. If your API runs on a different URL, update `Api:BaseUrl` in `src/RaceDay.Mvc/appsettings.json`.
 
-### Small additions beyond the plan (explained)
-- **401 responses** are returned by every protected endpoint (the plan only listed them on some), and **400** for validation failures.
-- **Cancelling an enrolment** sets its status to `Cancelled` instead of deleting the row (the schema has a unique `(ParticipantID, EventID)` constraint and a `Cancelled` status). Enrolling again reactivates it as `Pending`. A cancelled enrolment cannot receive a result, and an enrolment that already has a result cannot be cancelled (409).
-- **Recording a result** sets the enrolment status to `Confirmed`.
-- **Result responses include `totalFinishers`** so the Part 3 UI can show "47th out of 312".
-- **Deleting a category** that has enrolments returns 409. **Deleting an event** also removes its categories, enrolments and results.
-- Enrolling in an event whose date has passed returns 400.
+## Main features
 
-## Unit tests
+### Account and access
+- Registration and login are sent to the Part 2 API.
+- MVC stores the signed-in user's display information and the API session cookie in server-side ASP.NET Core session.
+- The API remains responsible for authentication and role enforcement. Organiser and Participant controllers check the session role before displaying protected pages.
+- Signing out calls the API logout endpoint and clears the MVC session.
+
+### Organiser
+- Dashboard for upcoming events created by the signed-in Organiser, with enrolment counts.
+- Create, edit and delete events.
+- Add and remove event categories.
+- View enrolments and record finish times and finishing positions.
+
+### Participant
+- Browse upcoming events and event categories.
+- Enrol under a selected category.
+- View enrolments and statuses, cancel eligible enrolments, and view published results.
+- Update profile details and upload a profile picture.
+
+### Local image handling (Part 3 implementation choice)
+- Event banners are stored under `wwwroot/uploads/events`.
+- Profile pictures are stored under `wwwroot/uploads/profiles`.
+- Allowed formats: JPG, JPEG, PNG and WEBP. Maximum upload size: 5 MB.
+- Event banner paths are associated with event IDs using small text sidecar files in the events upload folder. Profile picture paths are held in the signed-in MVC session.
+- Back up the `wwwroot/uploads` folder because these images are local to the MVC host.
+
+## CI and tests
+
+The GitHub Actions workflow at `.github/workflows/part2-ci.yml` restores and builds the solution (API, MVC and tests) and runs the existing API test project:
 
 ```bash
-cd Part2
-dotnet test
+ dotnet restore RaceDay.sln
+ dotnet build RaceDay.sln --configuration Release
+ dotnet test RaceDay.sln --configuration Release
 ```
 
-The tests boot the real API through `WebApplicationFactory` with `ASPNETCORE_ENVIRONMENT=Testing`, which swaps SQL Server for an isolated in-memory database, and use cookie-keeping `HttpClient`s so the session works exactly as it does in a browser. Coverage:
+## Important rubric note
 
-| File | What it checks |
-|---|---|
-| `AuthenticationTests` | Register (201/400/409), password stored hashed, login success/failure, profile get/update, logout ends the session |
-| `EventTests` | Organiser create/update/delete, ownership (403), validation (400), public listing, upcoming-only filter, 404s |
-| `RoleEnforcementTests` | Participant blocked from Organiser actions (403), Organiser blocked from Participant actions (403), every protected endpoint returns 401 without a session |
-| `EnrolmentTests` | Enrol (201, Pending, recorded), duplicate (409), wrong event/category (404), past event (400), organiser view, cancel, category rules |
-| `ResultTests` | Record result, duplicate (409), non-owner (403), Participant sees only own results, public ordered event results |
-| `PasswordHasherTests` | Hash/verify, salting, malformed hashes |
+The supplied Part 3 assignment document specifies Azure Blob Storage and Docker. This implementation follows the student's requested alternative of local `wwwroot` image storage and no Docker. It therefore does not claim to satisfy the Azure Blob Storage or Docker rubric criteria. Confirm the alternative with the lecturer before submission.
 
-## CI/CD
+## Before submission
 
-Race Results
-
-Record race results.
-
-View results for an event.
-
-Retrieve a participant's results.
-`.github/workflows/part2-ci.yml` restores, builds (Release) and runs all tests on every push and pull request.
-
-## AI usage disclosure
-`<Edit this to describe honestly how you used AI tools, e.g. "Claude was used to generate a first draft of the controllers and tests, which I reviewed, ran and modified.">`
-
-RaceDay – Part 3
-
-1. Project Overview
-
-RaceDay is a web-based race event management system developed using ASP.NET Core MVC and an existing ASP.NET Core Web API.
-
-The application allows Organisers to manage sporting events, categories, participant enrolments and race results. Participants can browse upcoming events, enrol in events, manage their profiles and view their race results.
+- Run the API and MVC locally and test both Organiser and Participant accounts.
+- Verify event creation, editing, deletion, category management, enrolment, cancellation, result publishing and profile updates.
+- Run `dotnet test RaceDay.sln` and confirm the GitHub Actions workflow passes.
+- Add at least 20 meaningful commits for the Part 3 work as required by the assignment; do not create artificial empty commits.
+- Add the real GitHub repository URL, CI screenshot and unlisted video link after recording your own demonstration. The video should show the code structure and the working features.
+- Review and understand the code, make any changes required by your lecturer, and disclose AI assistance accurately according to the assignment instructions.
