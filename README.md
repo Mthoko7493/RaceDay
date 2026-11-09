@@ -126,3 +126,43 @@ GitHub
 - Add at least 20 meaningful commits for the Part 3 work as required by the assignment; do not create artificial empty commits.
 - Add the real GitHub repository URL, CI screenshot and unlisted video link after recording your own demonstration. The video should show the code structure and the working features.
 - Review and understand the code, make any changes required by your lecturer, and disclose AI assistance accurately according to the assignment instructions.
+
+3. Main Features
+
+Organiser Features
+
+Organiser registration and login.
+
+Organiser dashboard.
+
+View created events and enrolment totals.
+
+Create, edit and delete events.
+
+Upload event banner images.
+
+Manage event categories.
+
+View participant enrolments and their statuses.
+
+Enter participant finishing times and positions.
+
+Publish race results.
+
+Participant Features
+
+Participant registration and login.
+
+View upcoming events.
+
+View event information and available categories.
+
+Enrol in events and select categories.
+
+View personal event enrolments and statuses.
+
+View personal race results.
+
+Update personal information.
+
+Upload a profile picture.
